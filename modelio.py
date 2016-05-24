@@ -17,7 +17,12 @@ def save(model, data_direction, notes=''):
     timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d_%H:%M:%S')
     modeltype = type(model).__name__
 
-    filename = 'model/{}_{}'.format(author, timestamp)
+    filename_prefix = 'model/{}_{}'.format(author, timestamp)
+    filename_ending = 1
+    while os.path.isfile('{}_{}'.format(filename_prefix,filename_ending)):
+        filename_ending += 1
+
+    filename = '{}_{}'.format(filename_prefix,filename_ending)
     logname = '{}_log.txt'.format(filename)
 
     file = open(filename, 'wb')

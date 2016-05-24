@@ -31,8 +31,9 @@ The program will save the model (as a binary file) together with a log in model 
 There will also be an all_log.txt file to save the log of all the model you've created
 
 All the above files will be saved in "model/" directory
-The name of the binary file is <author>_<time-stamp> and the name of log is <author>_<time-stamp>_log.txt
+The name of the binary file is <author>_<time-stamp>_<counter> and the name of log is <author>_<time-stamp>_<counter>_log.txt
 
+The <counter> is to avoid overwritten if you write several files in the same second
 If the data_direction cannot be found, the save will not be successful
 
 The method will return the name of the created binary file if save is successful, None otherwise
@@ -49,11 +50,6 @@ The method will return the model if load is successful, None otherwise.
 
 ----------------------------------------------------
 
-known bug:
-
-Due to the naming convention of the file, if several models are saved in the same second, the previous ones will be overwritten and only the last one can be saved
-
------------------------------------------------------
 USAGE EXAMPLE:
 
 If dtmodel is a decision tree model trained by data file "data/dbtt.csv". I can save the model by calling:
@@ -62,8 +58,8 @@ modelio.save(dtmodel, "data/dbtt.csv", "an example note")
 
 2 files will be created in model/ directory:
 
-haotian_2016-05-24_14:39:57
-haotian_2016-05-24_14:39:57_log.txt
+haotian_2016-05-24_14:39:57_1
+haotian_2016-05-24_14:39:57_1_log.txt
 
 Following information is included in the log:
 ------------------
