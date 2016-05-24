@@ -1,0 +1,98 @@
+The file has only been tested on python 3.4.3 on Ubuntu 14.04
+author: Haotian
+
+Usage:
+
+import modelio
+modelio.save(model, data_direction, notes='')
+modelio.load(filename)
+
+----------------------------------------------------
+
+To SAVE a model you've created, call
+
+modelio.save(model, data_direction, notes='')
+
+model is the model object you'd like to save
+data_direction is the name (including path if it's in a different folder) of .csv file you used to train this model
+notes is optional for you to put any extra notes you want to save about this model (for example, which feature was used in this model, wIt should be easy to use, I will write a readme file and upload it lateras this a model from cv or whole dataset,etc
+
+The program will save the model (as a binary file) together with a log in model directory, the log contains following information:
+
+-creater of model
+-type of model (linear/decision tree/gkrr etc.)
+-name of the data file
+-time of creation
+-extra notes you made
+
+-a backup of the binary file
+
+
+There will also be an all_log.txt file to save the log of all the model you've created
+
+All the above files will be saved in "model/" directory
+The name of the binary file is <author>_<time-stamp> and the name of log is <author>_<time-stamp>_log.txt
+
+If the data_direction cannot be found, the save will not be successful
+
+The method will return the name of the created binary file if save is successful, None otherwise
+
+----------------------------------------------------
+
+To LOAD a model you've saved, call
+
+modelio.load(filename)
+
+It will search the filename in both 'model/' and current directory
+
+The method will return the model if load is successful, None otherwise.
+
+----------------------------------------------------
+
+known bug:
+
+Due to the naming convention of the file, if several models are saved in the same second, the previous ones will be overwritten and only the last one can be saved
+
+-----------------------------------------------------
+USAGE EXAMPLE:
+
+If dtmodel is a decision tree model trained by data file "data/dbtt.csv". I can save the model by calling:
+
+modelio.save(dtmodel, "data/dbtt.csv", "an example note")
+
+2 files will be created in model/ directory:
+
+haotian_2016-05-24_14:39:57
+haotian_2016-05-24_14:39:57_log.txt
+
+Following information is included in the log:
+------------------
+creator:	haotian
+model type:	DecisionTreeRegressor
+based on data:	data/dbtt.csv
+created time:	2016-05-24_14:39:57
+notes:	an example note
+
+binary backup (DO NOT MODIFY!)
+<a very very long binary string will be shown here>
+-------------------
+
+and following information will be added to the all_log.txt:
+-------------------
+filename:	haotian_2016-05-24_14:39:57
+creator:	haotian
+model type:	DecisionTreeRegressor
+based on data:	data/dbtt.csv
+created time:	2016-05-24_14:39:57
+notes:	an example note
+-------------------
+
+If you want to load this model in the future, call:
+
+dtmodel = modelio.load('haotian_2016-05-24_14:39:57')
+
+or
+
+dtmodel = modelio.load('model/haotian_2016-05-24_14:39:57')
+
+this will return the model exactly as how you saved it.
