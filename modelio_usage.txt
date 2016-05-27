@@ -1,6 +1,12 @@
 The file has only been tested on python 3.4.3 on Ubuntu 14.04
 author: Haotian
 
+WARNING:
+
+This piece of code can save any python object into a binary file and load any binary file into your program.
+You can use this tool to save anything that you think might be useful in the future,
+but please NEVER load any binary file from unknown source.
+
 Usage:
 
 import modelio

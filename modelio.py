@@ -56,7 +56,7 @@ def load(filename):
     if os.path.isfile(filename):
         byte_stream = open(filename, 'rb').read()
     elif os.path.isfile('model/'+filename):
-        byte_stream = open('model/+filename', 'rb')
+        byte_stream = open('model/'+filename, 'rb').read()
     else:
         print("can't find file {}".format(filename))
         return None
